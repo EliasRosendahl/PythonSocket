@@ -1,27 +1,17 @@
-
+from server import Server
 import socket
 
-print("what")
 
-def main():
-    HOST = "127.0.0.1"
-    PORT = 9001
+class UDPServer(Server):
+    def __init__(self, HOST, PORT):
+        self.HOST = HOST
+        self.PORT = PORT
 
-    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) # UDP
-    # s = socket.socket(socket.AF_INET, socket.SOCK_STREAM) # TCP
+    def run(self):
+        print("running on port " + str(self.PORT))
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
-    s.bind((HOST, PORT))
-
-    # https://stackoverflow.com/questions/36325912/socket-error-errno-102-operation-not-supported-on-socket
-    # s.listen()
-    # connection, address = s.accept()
-
-    #How to detect client disconnect?
-    
-    while True:
-        msg, addr = s.recvfrom(1024)
-        print(msg)
-        print(addr)
-
-if __name__ == "__main__":
-    main()
+        s.bind((self.HOST, self.PORT))
+        while True:
+            msg, addr = s.recvfrom(1024)
+            print("received " + msg.decode() + " on port " + str(self.PORT) + " (UDP server)")
