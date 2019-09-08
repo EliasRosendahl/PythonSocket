@@ -9,7 +9,10 @@ def main():
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     with s:
         s.connect((HOST, PORT))
-        s.send(b'test')
+        while True:
+            i = input()
+            s.send(str.encode(i))
+            
 
 
 if __name__ == "__main__":

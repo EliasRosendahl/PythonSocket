@@ -13,6 +13,7 @@ def main():
     s.listen()
     connection, address = s.accept()
 
+    #How to detect client disconnect?
     with connection:
         print("Connection from: ", address)
         while True:
