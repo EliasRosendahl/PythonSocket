@@ -12,8 +12,8 @@ def main():
 			msg = input()
 			if (msg.upper() == 'L') or (msg.upper() == 'U'):
 				msg += '\0'
-				clientSocket.sendto(msg.encode("utf-8"), (HOST, PORT))
-				
+
+				send_udp(msg, clientSocket, HOST, PORT)
 				response = read_udp(clientSocket)
 
 				print(response)

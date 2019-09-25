@@ -7,7 +7,7 @@ def read_udp(conn):
     while ch != "\0".encode() and ch != "".encode():
         data += ch.decode()
         (ch, addr) = conn.recvfrom(1)
-    return data
+    return data, addr
 
 
 def send_udp(data, conn, HOST, PORT):
