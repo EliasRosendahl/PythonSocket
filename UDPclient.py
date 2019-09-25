@@ -9,16 +9,13 @@ def main():
 
 	try:
 		while True:
-			msg = input()
-			if (msg.upper() == 'L') or (msg.upper() == 'U'):
+			msg = input().upper()
 
-				send_udp(msg, clientSocket, HOST, PORT)
-				response = read_udp(clientSocket)
+			send_udp(msg, clientSocket, HOST, PORT)
+			response = read_udp(clientSocket)
 
-				print(response[0])
-				
-			else:
-				print("Unknown command")
+			print(response[0])
+	
 	
 	except socket.error:
 		clientSocket.close()

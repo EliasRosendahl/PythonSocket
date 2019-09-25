@@ -6,7 +6,7 @@ from UDPserver import UDPServer
 
 def main():
     servers = [
-        UDPServer('127.0.0.1', 9000),
+        #UDPServer('127.0.0.1', 9000),
         UDPServer('127.0.0.1', 9001)
         ]
 

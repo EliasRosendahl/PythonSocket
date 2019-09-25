@@ -18,15 +18,19 @@ class UDPServer(Server):
 			msg, addr = read_udp(serverSocket)
 			print("Received {} from {} on port {} (UDP server)".format(msg, str(addr[0]), str(addr[1])))
 			
-			if msg == 'L':
+			response = ""
+			if msg == "L":
 				#response = file_content("/proc/loadavg")	
 				response = "/proc/loadavg"
-			elif msg == 'U':
+			elif msg == "U":
 				#response = file_content("/proc/uptime")
 				response = "/proc/uptime"
-			elif msg == 'X':
-				send_udp("Terminated server..." serverSocket, addr[0], addr[1])
+			elif msg == "X":
+				response = "Terminated server..."
+				send_udp(response, serverSocket, addr[0], addr[1])
 				serverSocket.close()
 				exit()
+			else:
+				response = "Unknown command..."
 
 			send_udp(response, serverSocket, addr[0], addr[1])
