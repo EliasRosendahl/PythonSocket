@@ -1,17 +1,30 @@
 import socket
-
+#import lib from lib
 
 def main():
-    HOST = 'localhost'
-    PORT = 9001
+	HOST = 'localhost'
+	PORT = 9001
 
-    clientSocket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+	clientSocket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
-    while True:
-        msg = input()
-        clientSocket.sendto(str.encode(msg), (HOST, PORT))
-    clientSocket.close()
+	try:
+		while True:
+			msg = input()
+			if (msg.upper() == 'L') or (msg.upper() == 'U'):
+				msg += '\0'
+				clientSocket.sendto(msg.encode("utf-8"), (HOST, PORT))
+				
+				response = read_udp(clientSocket)
 
+				print(response)
+				
+			else:
+				print("Unknown command")
+	
+	except socket.error:
+		clientSocket.close()
+
+	clientSocket.close()
 
 if __name__ == "__main__":
-    main()
+	main()
