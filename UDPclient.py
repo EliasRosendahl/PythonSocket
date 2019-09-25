@@ -1,5 +1,5 @@
 import socket
-#import lib from lib
+import * from lib
 
 def main():
 	HOST = 'localhost'
