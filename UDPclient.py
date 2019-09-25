@@ -11,12 +11,11 @@ def main():
 		while True:
 			msg = input()
 			if (msg.upper() == 'L') or (msg.upper() == 'U'):
-				msg += '\0'
 
 				send_udp(msg, clientSocket, HOST, PORT)
 				response = read_udp(clientSocket)
 
-				print(response)
+				print(response[0])
 				
 			else:
 				print("Unknown command")

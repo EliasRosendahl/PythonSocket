@@ -11,12 +11,22 @@ class UDPServer(Server):
 
 	def run(self):
 		print("running on port " + str(self.PORT))
-		s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+		serverSocket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
-		s.bind((self.HOST, self.PORT))
+		serverSocket.bind((self.HOST, self.PORT))
 		while True:
-			msg, addr = read_udp(s)
-			print("received " + msg + " on port " + str(self.PORT) + " (UDP server)")
-			print(addr)
-			send_udp("aids", s, addr[0], addr[1])
+			msg, addr = read_udp(serverSocket)
+			print("Received {} from {} on port {} (UDP server)".format(msg, str(addr[0]), str(addr[1])))
+			
+			if msg == 'L':
+				#response = file_content("/proc/loadavg")	
+				response = "/proc/loadavg"
+			elif msg == 'U':
+				#response = file_content("/proc/uptime")
+				response = "/proc/uptime"
+			elif msg == 'X':
+				send_udp("Terminated server..." serverSocket, addr[0], addr[1])
+				serverSocket.close()
+				exit()
 
+			send_udp(response, serverSocket, addr[0], addr[1])
