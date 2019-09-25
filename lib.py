@@ -1,5 +1,11 @@
 
 
+def file_content(path):
+    content = ""
+    with open(path, "r") as f:
+        return f.read()
+
+
 def read_udp(conn):
     data = ""
 
@@ -8,6 +14,8 @@ def read_udp(conn):
         data += ch.decode()
         (ch, addr) = conn.recvfrom(1)
     return data, addr
+
+
 
 
 def send_udp(data, conn, HOST, PORT):
