@@ -1,6 +1,8 @@
 from server import Server
 import socket
 
+from lib import *
+
 
 class UDPServer(Server):
     def __init__(self, HOST, PORT):
@@ -13,5 +15,6 @@ class UDPServer(Server):
 
         s.bind((self.HOST, self.PORT))
         while True:
-            msg, addr = s.recvfrom(1024)
-            print("received " + msg.decode() + " on port " + str(self.PORT) + " (UDP server)")
+            msg = read_udp(s)
+            print("received " + msg + " on port " + str(self.PORT) + " (UDP server)")
+
