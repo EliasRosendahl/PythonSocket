@@ -20,11 +20,11 @@ class UDPServer(Server):
 			
 			response = ""
 			if msg == "L":
-				#response = file_content("/proc/loadavg")	
-				response = "/proc/loadavg"
+				response = file_content("/proc/loadavg")	
+				#response = "/proc/loadavg"
 			elif msg == "U":
-				#response = file_content("/proc/uptime")
-				response = "/proc/uptime"
+				response = file_content("/proc/uptime")
+				#response = "/proc/uptime"
 			elif msg == "X":
 				response = "Terminated server..."
 				send_udp(response, serverSocket, addr[0], addr[1])
